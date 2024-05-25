@@ -11,11 +11,20 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as EditImport } from './routes/edit'
 import { Route as AddImport } from './routes/add'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
+import { Route as SettingIndexImport } from './routes/setting/index'
+import { Route as SettingSortImport } from './routes/setting/sort'
+import { Route as DetailHabitIdImport } from './routes/detail/$habitId'
 
 // Create/Update Routes
+
+const EditRoute = EditImport.update({
+  path: '/edit',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AddRoute = AddImport.update({
   path: '/add',
@@ -29,6 +38,21 @@ const AboutRoute = AboutImport.update({
 
 const IndexRoute = IndexImport.update({
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SettingIndexRoute = SettingIndexImport.update({
+  path: '/setting/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SettingSortRoute = SettingSortImport.update({
+  path: '/setting/sort',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DetailHabitIdRoute = DetailHabitIdImport.update({
+  path: '/detail/$habitId',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -57,6 +81,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AddImport
       parentRoute: typeof rootRoute
     }
+    '/edit': {
+      id: '/edit'
+      path: '/edit'
+      fullPath: '/edit'
+      preLoaderRoute: typeof EditImport
+      parentRoute: typeof rootRoute
+    }
+    '/detail/$habitId': {
+      id: '/detail/$habitId'
+      path: '/detail/$habitId'
+      fullPath: '/detail/$habitId'
+      preLoaderRoute: typeof DetailHabitIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/setting/sort': {
+      id: '/setting/sort'
+      path: '/setting/sort'
+      fullPath: '/setting/sort'
+      preLoaderRoute: typeof SettingSortImport
+      parentRoute: typeof rootRoute
+    }
+    '/setting/': {
+      id: '/setting/'
+      path: '/setting'
+      fullPath: '/setting'
+      preLoaderRoute: typeof SettingIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -66,6 +118,10 @@ export const routeTree = rootRoute.addChildren({
   IndexRoute,
   AboutRoute,
   AddRoute,
+  EditRoute,
+  DetailHabitIdRoute,
+  SettingSortRoute,
+  SettingIndexRoute,
 })
 
 /* prettier-ignore-end */
@@ -78,7 +134,11 @@ export const routeTree = rootRoute.addChildren({
       "children": [
         "/",
         "/about",
-        "/add"
+        "/add",
+        "/edit",
+        "/detail/$habitId",
+        "/setting/sort",
+        "/setting/"
       ]
     },
     "/": {
@@ -89,6 +149,18 @@ export const routeTree = rootRoute.addChildren({
     },
     "/add": {
       "filePath": "add.tsx"
+    },
+    "/edit": {
+      "filePath": "edit.tsx"
+    },
+    "/detail/$habitId": {
+      "filePath": "detail/$habitId.tsx"
+    },
+    "/setting/sort": {
+      "filePath": "setting/sort.tsx"
+    },
+    "/setting/": {
+      "filePath": "setting/index.tsx"
     }
   }
 }
