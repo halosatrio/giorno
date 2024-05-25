@@ -1,5 +1,5 @@
-import Modal from "@/components/Modal";
-import { TEXT_COLORS } from "@/config/constant";
+import Modal from "../components/Modal";
+import { TEXT_COLORS } from "../config/constant";
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
 import {
   ArrowPathRoundedSquareIcon,
@@ -17,10 +17,10 @@ import DatePicker from "react-datepicker";
 await import("react-datepicker/dist/react-datepicker.css");
 
 export const Route = createFileRoute("/add")({
-  component: AddHabitView,
+  component: Add,
 });
 
-function AddHabitView() {
+function Add() {
   const [habitName, setHabitName] = useState("");
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [perDayCounter, setPerDayCounter] = useState(1);

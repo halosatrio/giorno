@@ -10,10 +10,11 @@ import dayjs, { type Dayjs } from "dayjs";
 import { useMemo, useState } from "react";
 import HabitCard from "@/components/HabitCard";
 import { habit } from "@/data/habbit";
-import { Link } from "@tanstack/react-router";
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 
-// import { habitItems } from '@/data/habbit';
+export const Route = createFileRoute("/")({
+  component: Index,
+});
 
 const habitItems: habit[] = [
   {
@@ -54,11 +55,15 @@ const habitItems: habit[] = [
   },
 ];
 
-export const Route = createFileRoute("/")({
-  component: HomeView,
-});
+// function Index() {
+//   return (
+//     <div className="p-2">
+//       <h3>Welcome Home!</h3>
+//     </div>
+//   );
+// }
 
-function HomeView() {
+function Index() {
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const today = dayjs();
 
