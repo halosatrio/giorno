@@ -8,8 +8,8 @@ import {
 } from "@heroicons/react/24/solid";
 import dayjs, { type Dayjs } from "dayjs";
 import { useMemo, useState } from "react";
-import HabitCard from "../components/HabitCard";
-import { habit } from "../data/habbit";
+import HabitCard from "@/components/HabitCard";
+import { habit } from "@/data/habbit";
 import { Link } from "@tanstack/react-router";
 import { createFileRoute } from "@tanstack/react-router";
 

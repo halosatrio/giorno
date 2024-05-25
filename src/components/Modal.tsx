@@ -9,7 +9,7 @@ import {
   ITEM_COLORS,
   SELECTED_ICON_COLORS,
   TEXT_COLORS,
-} from "../config/constant";
+} from "@/config/constant";
 import { XCircleIcon, BookOpenIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import { ReactElement, useState } from "react";

@@ -1,5 +1,5 @@
-import Modal from "../components/Modal";
-import { TEXT_COLORS } from "../config/constant";
+import Modal from "@/components/Modal";
+import { TEXT_COLORS } from "@/config/constant";
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
 import {
   ArrowPathRoundedSquareIcon,

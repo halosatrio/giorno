@@ -1,7 +1,7 @@
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import { PlusCircleIcon } from "@heroicons/react/24/outline";
-import { habit } from "../data/habbit";
-import { BG_COLORS, TEXT_COLORS } from "../config/constant";
+import { habit } from "@/data/habbit";
+import { BG_COLORS, TEXT_COLORS } from "@/config/constant";
 import { useMemo, useState } from "react";
 import clsx from "clsx";
 import { TrackerData } from "../data/tracker";
