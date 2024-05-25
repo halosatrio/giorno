@@ -9,7 +9,7 @@ export const Route = createFileRoute("/about")({
 function About() {
   return (
     <div className="w-full max-w-[480px] h-screen bg-zinc-800 my-0 mx-auto px-4 pt-4">
-      <div className="flex flex-col justify-between h-screen">
+      <div className="flex flex-col justify-between h-full">
         {/* <!-- header --> */}
         <header className="flex justify-between mb-6 -ml-2">
           <Link to="/setting" className="flex items-center">

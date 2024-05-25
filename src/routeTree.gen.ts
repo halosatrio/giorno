@@ -11,20 +11,15 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as EditImport } from './routes/edit'
 import { Route as AddImport } from './routes/add'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as SettingIndexImport } from './routes/setting/index'
 import { Route as SettingSortImport } from './routes/setting/sort'
+import { Route as EditIdImport } from './routes/edit/$id'
 import { Route as DetailHabitIdImport } from './routes/detail/$habitId'
 
 // Create/Update Routes
-
-const EditRoute = EditImport.update({
-  path: '/edit',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const AddRoute = AddImport.update({
   path: '/add',
@@ -48,6 +43,11 @@ const SettingIndexRoute = SettingIndexImport.update({
 
 const SettingSortRoute = SettingSortImport.update({
   path: '/setting/sort',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const EditIdRoute = EditIdImport.update({
+  path: '/edit/$id',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -81,18 +81,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AddImport
       parentRoute: typeof rootRoute
     }
-    '/edit': {
-      id: '/edit'
-      path: '/edit'
-      fullPath: '/edit'
-      preLoaderRoute: typeof EditImport
-      parentRoute: typeof rootRoute
-    }
     '/detail/$habitId': {
       id: '/detail/$habitId'
       path: '/detail/$habitId'
       fullPath: '/detail/$habitId'
       preLoaderRoute: typeof DetailHabitIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/edit/$id': {
+      id: '/edit/$id'
+      path: '/edit/$id'
+      fullPath: '/edit/$id'
+      preLoaderRoute: typeof EditIdImport
       parentRoute: typeof rootRoute
     }
     '/setting/sort': {
@@ -118,8 +118,8 @@ export const routeTree = rootRoute.addChildren({
   IndexRoute,
   AboutRoute,
   AddRoute,
-  EditRoute,
   DetailHabitIdRoute,
+  EditIdRoute,
   SettingSortRoute,
   SettingIndexRoute,
 })
@@ -135,8 +135,8 @@ export const routeTree = rootRoute.addChildren({
         "/",
         "/about",
         "/add",
-        "/edit",
         "/detail/$habitId",
+        "/edit/$id",
         "/setting/sort",
         "/setting/"
       ]
@@ -150,11 +150,11 @@ export const routeTree = rootRoute.addChildren({
     "/add": {
       "filePath": "add.tsx"
     },
-    "/edit": {
-      "filePath": "edit.tsx"
-    },
     "/detail/$habitId": {
       "filePath": "detail/$habitId.tsx"
+    },
+    "/edit/$id": {
+      "filePath": "edit/$id.tsx"
     },
     "/setting/sort": {
       "filePath": "setting/sort.tsx"

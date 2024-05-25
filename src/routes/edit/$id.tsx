@@ -1,5 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
-
 import Modal from "@/components/Modal";
 import {
   BookOpenIcon,
@@ -13,11 +11,11 @@ import {
 } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
-// import { useNavigate } from "react-router-dom";
+import { Link, createFileRoute } from "@tanstack/react-router";
 
 await import("react-datepicker/dist/react-datepicker.css");
 
-export const Route = createFileRoute("/edit")({
+export const Route = createFileRoute("/edit/$id")({
   component: Edit,
 });
 
@@ -26,17 +24,15 @@ function Edit() {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [perDayCounter, setPerDayCounter] = useState(1);
   const [daysPerCounter, setDaysPerCounter] = useState(1);
-  // const navigate = useNavigate();
 
   return (
     <div className="w-full max-w-[480px] h-screen bg-zinc-800 my-0 mx-auto flex flex-col justify-start">
       {/* <!-- header back navigation --> */}
       <header className="pt-4 mb-8 ml-2">
-        {/* <button onClick={() => navigate(-1)} className="flex items-center"> */}
-        <button onClick={() => {}} className="flex items-center">
+        <Link to="/detail/$id" className="flex items-center">
           <ChevronLeftIcon className="h-8 text-neutral-100 mr-2" />
           <span className="text-zinc-100 text-xl">Back</span>
-        </button>
+        </Link>
       </header>
 
       {/* <!-- main layout --> */}
