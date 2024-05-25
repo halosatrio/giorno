@@ -1,5 +1,5 @@
-import Modal from "@/components/Modal";
-import { TEXT_COLORS } from "@/config/constant";
+import Modal from "../components/Modal";
+import { TEXT_COLORS } from "../config/constant";
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
 import {
   ArrowPathRoundedSquareIcon,
@@ -9,14 +9,18 @@ import {
   PlusIcon,
   MinusIcon,
 } from "@heroicons/react/24/solid";
-import { Link } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import clsx from "clsx";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 
 await import("react-datepicker/dist/react-datepicker.css");
 
-const AddHabitView = () => {
+export const Route = createFileRoute("/add")({
+  component: AddHabitView,
+});
+
+function AddHabitView() {
   const [habitName, setHabitName] = useState("");
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [perDayCounter, setPerDayCounter] = useState(1);
@@ -128,6 +132,4 @@ const AddHabitView = () => {
       </main>
     </div>
   );
-};
-
-export default AddHabitView;
+}

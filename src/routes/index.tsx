@@ -9,8 +9,10 @@ import {
 import dayjs, { type Dayjs } from "dayjs";
 import { useMemo, useState } from "react";
 import HabitCard from "../components/HabitCard";
-import { habit } from "@/data/habbit";
+import { habit } from "../data/habbit";
 import { Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
+
 // import { habitItems } from '@/data/habbit';
 
 const habitItems: habit[] = [
@@ -52,7 +54,11 @@ const habitItems: habit[] = [
   },
 ];
 
-const HomeView = () => {
+export const Route = createFileRoute("/")({
+  component: HomeView,
+});
+
+function HomeView() {
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const today = dayjs();
 
@@ -153,6 +159,4 @@ const HomeView = () => {
       </main>
     </div>
   );
-};
-
-export default HomeView;
+}
