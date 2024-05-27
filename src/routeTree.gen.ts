@@ -11,6 +11,7 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as LoginImport } from './routes/login'
 import { Route as AddImport } from './routes/add'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
@@ -20,6 +21,11 @@ import { Route as EditIdImport } from './routes/edit/$id'
 import { Route as DetailHabitIdImport } from './routes/detail/$habitId'
 
 // Create/Update Routes
+
+const LoginRoute = LoginImport.update({
+  path: '/login',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AddRoute = AddImport.update({
   path: '/add',
@@ -81,6 +87,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AddImport
       parentRoute: typeof rootRoute
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginImport
+      parentRoute: typeof rootRoute
+    }
     '/detail/$habitId': {
       id: '/detail/$habitId'
       path: '/detail/$habitId'
@@ -118,6 +131,7 @@ export const routeTree = rootRoute.addChildren({
   IndexRoute,
   AboutRoute,
   AddRoute,
+  LoginRoute,
   DetailHabitIdRoute,
   EditIdRoute,
   SettingSortRoute,
@@ -135,6 +149,7 @@ export const routeTree = rootRoute.addChildren({
         "/",
         "/about",
         "/add",
+        "/login",
         "/detail/$habitId",
         "/edit/$id",
         "/setting/sort",
@@ -149,6 +164,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/add": {
       "filePath": "add.tsx"
+    },
+    "/login": {
+      "filePath": "login.tsx"
     },
     "/detail/$habitId": {
       "filePath": "detail/$habitId.tsx"
