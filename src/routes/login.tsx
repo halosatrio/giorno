@@ -1,10 +1,32 @@
 import { createFileRoute } from "@tanstack/react-router";
+import axios from "axios";
+import { useState } from "react";
 
-export const Route = createFileRoute("/login")({
-  component: Login,
-});
+// interface LoginReq {
+//   email: string;
+//   password: string;
+// }
 
 function Login() {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const apiUrl = import.meta.env.VITE_BASE_API_URL;
+
+  function loginUser(email: string, password: string) {
+    axios
+      .post(`${apiUrl}/auth`, {
+        email: email,
+        password: password,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   return (
     <div className="w-full max-w-[480px] h-screen bg-zinc-800 my-0 mx-auto flex flex-col justify-start">
       <div className="flex flex-col justify-center items-center h-full">
@@ -21,6 +43,7 @@ function Login() {
                 autoComplete="email"
                 className="block flex-1 border-0 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 rounded-sm"
                 placeholder="john@doe.com"
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
@@ -34,12 +57,22 @@ function Login() {
                 autoComplete="password"
                 className="block flex-1 border-0 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 rounded-sm"
                 placeholder="password"
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <button className="py-2 bg-blue-500 rounded-md">Login</button>
+            <button
+              className="py-2 bg-blue-500 rounded-md"
+              onClick={() => loginUser(email, password)}
+            >
+              Login
+            </button>
           </div>
         </main>
       </div>
     </div>
   );
 }
+
+export const Route = createFileRoute("/login")({
+  component: Login,
+});
