@@ -7,14 +7,11 @@ import {
   PlusCircleIcon,
 } from "@heroicons/react/24/solid";
 import dayjs, { type Dayjs } from "dayjs";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import HabitCard from "@/components/HabitCard";
 import { habit } from "@/data/habbit";
 import { Link, createFileRoute } from "@tanstack/react-router";
-
-export const Route = createFileRoute("/")({
-  component: Index,
-});
+import axios from "axios";
 
 const habitItems: habit[] = [
   {
@@ -55,17 +52,28 @@ const habitItems: habit[] = [
   },
 ];
 
-// function Index() {
-//   return (
-//     <div className="p-2">
-//       <h3>Welcome Home!</h3>
-//     </div>
-//   );
-// }
-
 function Index() {
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const today = dayjs();
+
+  const apiUrl = import.meta.env.VITE_BASE_API_URL;
+
+  let token = "hehe";
+
+  useEffect(() => {
+    axios
+      .get(`${apiUrl}/habits`, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then(function (response) {
+        console.log("all habits", response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
 
   const calculateLast7Days = () => {
     const today = dayjs();
@@ -165,3 +173,7 @@ function Index() {
     </div>
   );
 }
+
+export const Route = createFileRoute("/")({
+  component: Index,
+});

@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import axios from "axios";
 import { useState } from "react";
 
@@ -8,6 +8,7 @@ import { useState } from "react";
 // }
 
 function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -19,8 +20,10 @@ function Login() {
         email: email,
         password: password,
       })
-      .then(function (response) {
-        console.log(response);
+      .then(function () {
+        navigate({
+          to: "/",
+        });
       })
       .catch(function (error) {
         console.log(error);
