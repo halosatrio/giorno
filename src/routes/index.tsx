@@ -7,11 +7,12 @@ import {
   PlusCircleIcon,
 } from "@heroicons/react/24/solid";
 import dayjs, { type Dayjs } from "dayjs";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import HabitCard from "@/components/HabitCard";
 import { habit } from "@/data/habbit";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 
 const habitItems: habit[] = [
   {
@@ -60,20 +61,16 @@ function Index() {
 
   let token = "hehe";
 
-  useEffect(() => {
-    axios
-      .get(`${apiUrl}/habits`, {
+  const { data, isLoading } = useQuery({
+    queryKey: ["get-habits"],
+    queryFn: () => {
+      axios.get(`${apiUrl}/habits`, {
         headers: {
           Authorization: "Bearer " + token,
         },
-      })
-      .then(function (response) {
-        console.log("all habits", response);
-      })
-      .catch(function (error) {
-        console.log(error);
       });
-  }, []);
+    },
+  });
 
   const calculateLast7Days = () => {
     const today = dayjs();
@@ -102,6 +99,9 @@ function Index() {
       return "bg-neutral-700";
     }
   };
+
+  console.log("habitsData", data);
+  console.log("isLoading", isLoading);
 
   return (
     <div className="w-full max-w-[480px] h-screen bg-zinc-800 my-0 mx-auto pt-4 px-4 pb-16">
